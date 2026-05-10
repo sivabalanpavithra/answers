@@ -1,0 +1,142 @@
+1)
+ORG 0000H
+MOV A,#25H
+MOV B,#05H
+ADD A,B      ; Addition
+SUBB A,#02H  ;Subtraction
+MOV A,#05H
+MOV B,#04H
+MUL AB       ; Multiplication
+MOV A,#20H
+MOV B,#04H
+DIV AB       ; Division
+END
+
+2)
+ORG 0000H
+MOV R1,#55H
+MOV R2,R1
+END
+
+3)
+ORG 0000H
+MOV 30H,#45H
+MOV A,30H
+END
+
+
+4)
+ORG 0000H
+MOV A,#25H
+MOV R1,#20H
+CJNE A,R1,NOTEQUAL
+NOTEQUAL:
+END
+
+
+5)
+#include <reg51.h>
+void main()
+{
+    int a=10,b=5;
+    int sum,mul;
+    sum=a+b;
+    mul=a*b;
+    while(1);
+}
+
+
+6)
+#include <reg51.h>
+void main()
+{
+    int a=20,b=5;
+    int sub,div;
+    sub=a-b;
+    div=a/b;
+    while(1);
+}
+
+
+7)
+#include <reg51.h>
+void main()
+{
+    int a=12,b=4;
+    int add,sub,mul,div;
+    add=a+b;
+    sub=a-b;
+    mul=a*b;
+    div=a/b;
+    while(1);
+}
+
+
+8)
+#include <reg51.h>
+void main()
+{
+    unsigned char a=0x0F,b=0xF0;
+    unsigned char andop,orop,xorop;
+    andop=a&b;
+    orop=a|b;
+    xorop=a^b;
+    while(1);
+}
+
+
+9)
+#include <reg51.h>
+void main()
+{
+    int a=20,b=15;
+    if(a>b)
+    {
+        P1=0xFF;
+    }
+    else
+    {
+        P1=0x00;
+    }
+    while(1);
+}
+
+
+10)
+int led = 13;
+void setup()
+{
+    pinMode(led, OUTPUT);
+}
+void loop()
+{
+    digitalWrite(led, HIGH);
+    delay(1000);
+    digitalWrite(led, LOW);
+    delay(1000);
+}
+
+
+11)
+from machine import Pin
+from utime import sleep
+sleep(0.01) # Wait for USB to connect
+print("Hello, Pi Pico!")
+led = Pin(5, Pin.OUT)
+while True:
+  led.toggle()
+  sleep(0.5)
+
+
+12)
+from machine import Pin
+import dht
+import time
+sensor = dht.DHT22(Pin(15))
+while True:
+    sensor.measure()
+    temp = sensor.temperature()
+    hum = sensor.humidity()
+    print("Temperature:", temp, "°C")
+    print("Humidity:", hum, "%")
+    time.sleep(2)
