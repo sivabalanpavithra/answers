@@ -1,142 +1,228 @@
-1)
+###################################  exp1
 ORG 0000H
-MOV A,#25H
-MOV B,#05H
-ADD A,B      ; Addition
-SUBB A,#02H  ;Subtraction
-MOV A,#05H
-MOV B,#04H
-MUL AB       ; Multiplication
-MOV A,#20H
-MOV B,#04H
-DIV AB       ; Division
-END
 
-2)
-ORG 0000H
-MOV R1,#55H
-MOV R2,R1
-END
+; -------- ADDITION --------
+MOV A, #25H      ; Load first number into A
+MOV R0, #15H     ; Load second number into R0
+ADD A, R0        ; A = A + R0
+MOV 30H, A       ; Store result at memory location 30H
 
-3)
-ORG 0000H
-MOV 30H,#45H
-MOV A,30H
-END
+; -------- SUBTRACTION --------
+MOV A, #25H      ; Load first number
+MOV R1, #10H     ; Load second number
+SUBB A, R1       ; A = A - R1
+MOV 31H, A       ; Store result at memory location 31H
 
+; -------- MULTIPLICATION --------
+MOV A, #05H      ; First number
+MOV B, #04H      ; Second number
+MUL AB           ; Multiply A and B
+MOV 32H, A       ; Store lower byte result
+MOV 33H, B       ; Store higher byte result
 
-4)
-ORG 0000H
-MOV A,#25H
-MOV R1,#20H
-CJNE A,R1,NOTEQUAL
-NOTEQUAL:
+; -------- DIVISION --------
+MOV A, #20H      ; Dividend
+MOV B, #04H      ; Divisor
+DIV AB           ; A = Quotient, B = Remainder
+MOV 34H, A       ; Store quotient
+MOV 35H, B       ; Store remainder
+
 END
 
 
-5)
+#################################################### exp2
+ORG 0000H
+
+MOV R0, #25H     ; Load value 25H into R0
+MOV A, R0        ; Transfer data from R0 to Accumulator
+MOV R1, A        ; Transfer data from Accumulator to R1
+
+END
+
+
+###############################################  exp3
+
+ORG 0000H
+
+MOV 30H, #55H    ; Store 55H in memory location 30H
+MOV A, 30H       ; Transfer data from memory to Accumulator
+MOV R2, A        ; Transfer data from Accumulator to register R2
+
+END
+
+
+############################################## exp4
+
+
+ORG 0000H
+
+MOV A, #25H
+CLR C
+SUBB A, #20H
+
+JZ  EQUAL
+JC  LESS
+
+MOV 30H, #01H    ; A > 20H
+SJMP STOP
+
+EQUAL:
+MOV 30H, #02H    ; A = 20H
+SJMP STOP
+
+LESS:
+MOV 30H, #03H    ; A < 20H
+
+STOP:
+END
+
+
+############################################ exp5
+
 #include <reg51.h>
+
 void main()
 {
-    int a=10,b=5;
-    int sum,mul;
-    sum=a+b;
-    mul=a*b;
+    unsigned char a = 10;
+    unsigned char b = 5;
+    unsigned int add, mul;
+
+    add = a + b;      // Addition
+    mul = a * b;      // Multiplication
+
+    while(1);
+}
+
+############################################ exp6
+
+#include <reg51.h>
+
+void main()
+{
+    unsigned char a = 20;
+    unsigned char b = 4;
+    unsigned char sub, div;
+
+    sub = a - b;      // Subtraction
+    div = a / b;      // Division
+
     while(1);
 }
 
 
-6)
+
+############################################ exp7
+
 #include <reg51.h>
+
 void main()
 {
-    int a=20,b=5;
-    int sub,div;
-    sub=a-b;
-    div=a/b;
+    unsigned char a = 15;
+    unsigned char b = 5;
+
+    unsigned char add, sub, mul, div;
+
+    add = a + b;
+    sub = a - b;
+    mul = a * b;
+    div = a / b;
+
     while(1);
 }
 
+############################################ exp8
 
-7)
 #include <reg51.h>
+
 void main()
 {
-    int a=12,b=4;
-    int add,sub,mul,div;
-    add=a+b;
-    sub=a-b;
-    mul=a*b;
-    div=a/b;
+    unsigned char a = 0x0F;
+    unsigned char b = 0xF0;
+
+    unsigned char and_op, or_op, xor_op, not_op;
+
+    and_op = a & b;   // AND
+    or_op  = a | b;   // OR
+    xor_op = a ^ b;   // XOR
+    not_op = ~a;      // NOT
+
     while(1);
 }
 
+############################################ exp9
 
-8)
+
 #include <reg51.h>
+
 void main()
 {
-    unsigned char a=0x0F,b=0xF0;
-    unsigned char andop,orop,xorop;
-    andop=a&b;
-    orop=a|b;
-    xorop=a^b;
-    while(1);
-}
+    unsigned char a = 25;
+    unsigned char b = 20;
 
-
-9)
-#include <reg51.h>
-void main()
-{
-    int a=20,b=15;
-    if(a>b)
+    if(a > b)
     {
-        P1=0xFF;
+        P1 = 0x01;    // a is greater
+    }
+    else if(a < b)
+    {
+        P1 = 0x02;    // b is greater
     }
     else
     {
-        P1=0x00;
+        P1 = 0x03;    // both are equal
     }
+
     while(1);
 }
 
-
-10)
+##############################################    exp10.
 int led = 13;
 void setup()
 {
     pinMode(led, OUTPUT);
 }
+
 void loop()
 {
     digitalWrite(led, HIGH);
     delay(1000);
+
     digitalWrite(led, LOW);
     delay(1000);
 }
 
-
-11)
+############################################################exp11.)
 from machine import Pin
-from utime import sleep
-sleep(0.01) # Wait for USB to connect
-print("Hello, Pi Pico!")
-led = Pin(5, Pin.OUT)
+from time import sleep
+
+led = Pin(18, Pin.OUT)   # GPIO18 as output
+
 while True:
-  led.toggle()
-  sleep(0.5)
+    led.on()             # LED ON
+    sleep(1)
+
+    led.off()            # LED OFF
+    sleep(1)
 
 
-12)
+----------------------------------led negative-->GND  positive--->gp18
+
+######################################################   exp 13
 from machine import Pin
 import dht
 import time
+
 sensor = dht.DHT22(Pin(15))
+
 while True:
     sensor.measure()
+
     temp = sensor.temperature()
     hum = sensor.humidity()
+
     print("Temperature:", temp, "°C")
     print("Humidity:", hum, "%")
+
     time.sleep(2)
+
+----->DHT22   VCC-->3V3     SDA-->GP15   GND-->GND4
