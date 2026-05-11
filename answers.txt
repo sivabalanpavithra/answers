@@ -1,0 +1,38 @@
+###################################### EXP 8 #######################################
+<html>
+<head>
+<title>Home Page</title>
+</head>
+<body>
+<h1>My Website</h1>
+<img src="logo.png" width="100">
+<table border="1">
+<tr>
+<th>Name</th>
+<th>Course</th>
+</tr>
+<tr>
+<td>Siva</td>
+<td>MCA</td>
+</tr>
+</table>
+<a href="about.html">About Us</a>
+</body>
+</html>
+
+
+###################################### EXP 9 ####################################
+
+<html>
+<head>
+<title>Search Page</title>
+</head>
+<body>
+<h1>Search Interface</h1>
+<input type="text" placeholder="Search here">
+<button>Search</button>
+<br><br>
+<a href="home.html">Home</a>
+<a href="contact.html">Contact</a>
+</body>
+</html>
