@@ -1,24 +1,56 @@
 ###################################### EXP 8 #######################################
 <html>
 <head>
-<title>Home Page</title>
+<title>My Home Page</title>
 </head>
-<body>
-<h1>My Website</h1>
-<img src="logo.png" width="100">
-<table border="1">
+<body style="background-color: lightblue;">
+<center>
+<h1>WELCOME TO MY WEBSITE</h1>
+</center>
+<hr>
+<!-- Banner -->
+<center><img src="banner.jpg" height="150" width="30%"></center>
+<br>
+<br>
+<!-- Logo -->
+<img src="Logo.png" height="100" width="100">
+<h2>Quick Navigation</h2>
+<a href="home.html">Home</a> |
+<a href="about.html">About</a> |
+<a href="contact.html">Contact</a>
+<br>
+<br>
+<h2>Student Details</h2>
+<table border="1" cellpadding="10">
+<tbody>
 <tr>
 <th>Name</th>
-<th>Course</th>
+<th>Department</th>
+<th>Year</th>
 </tr>
 <tr>
 <td>Siva</td>
-<td>MCA</td>
+<td>CSE</td>
+<td>III</td>
 </tr>
+<tr>
+<td>Rahul</td>
+<td>IT</td>
+<td>II</td>
+</tr>
+</tbody>
 </table>
-<a href="about.html">About Us</a>
+<br>
+<h2>Quick Links</h2>
+<ul>
+<li><a href="https://www.google.com">Google</a></li>
+<li><a href="https://www.gmail.com">Gmail</a></li>
+<li><a href="https://www.wikipedia.org">Wikipedia</a></li>
+</ul>
 </body>
 </html>
+
+
 
 
 ###################################### EXP 9 ####################################
