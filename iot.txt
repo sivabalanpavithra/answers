@@ -1,97 +1,547 @@
-########################### POM #######################
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+############################################ EXP 1 PASSPORT  ###########################################
 
-    <modelVersion>4.0.0</modelVersion>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passport Automation System - 3 Layer Architecture</title>
 
-    <groupId>org.example</groupId>
-    <artifactId>SeleniumTestNG</artifactId>
-    <version>1.0-SNAPSHOT</version>
+<style>
 
-    <dependencies>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:20px;
+}
 
-        <!-- Selenium -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.21.0</version>
-        </dependency>
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
 
-        <!-- TestNG -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.10.2</version>
-            <scope>test</scope>
-        </dependency>
+h1{
+    text-align:center;
+    color:darkblue;
+}
 
-    </dependencies>
+.layer{
+    margin-top:25px;
+    padding:15px;
+    border-left:6px solid darkblue;
+    background:#eef3ff;
+    border-radius:5px;
+}
 
-</project>
+textarea{
+    width:100%;
+    height:220px;
+    border:1px solid gray;
+    border-radius:5px;
+    padding:10px;
+    font-family: Consolas;
+    font-size:14px;
+    background:#fafafa;
+}
 
-################################ LOGINTEST ####################################
+button{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    background:darkblue;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+button:hover{
+    background:navy;
+}
 
-public class LoginTest {
+.output{
+    margin-top:25px;
+    padding:15px;
+    background:#e8ffe8;
+    border-left:6px solid green;
+    border-radius:5px;
+    display:none;
+}
 
-    @Test
-    public void loginTest() {
+</style>
+</head>
 
-        WebDriver driver = new ChromeDriver();
+<body>
 
-        driver.get("https://www.saucedemo.com");
+<div class="container">
 
-        driver.findElement(By.id("user-name"))
-                .sendKeys("standard_user");
+<h1>Passport Automation System</h1>
 
-        driver.findElement(By.id("password"))
-                .sendKeys("secret_sauce");
+<div class="layer">
+<h2>1. Domain Object Layer</h2>
 
-        driver.findElement(By.id("login-button"))
-                .click();
+<textarea readonly>
+class PassportRecord {
 
-        System.out.println("Login Successful");
+    String id;
+    String name;
+    String status;
 
-        driver.quit();
+    PassportRecord(id, name){
+        this.id = id;
+        this.name = name;
+        this.status = "New";
+    }
+}
+</textarea>
+
+<p>
+This layer stores passport applicant information and acts as the business object layer.
+</p>
+
+</div>
+
+
+<div class="layer">
+<h2>2. Technical Service Layer</h2>
+
+<textarea readonly>
+class PassportService {
+
+    createRecord(name){
+        // create passport application
+    }
+
+    processVerification(id, passed){
+        // verify applicant
+    }
+
+    find(id){
+        // search application
+    }
+}
+</textarea>
+
+<p>
+This layer handles business logic, verification process and application management.
+</p>
+
+</div>
+
+
+<div class="layer">
+<h2>3. User Interface Layer</h2>
+
+<textarea readonly>
+class PassportApp {
+
+    main(){
+
+        // get user input
+
+        // call service layer
+
+        // display output
+    }
+}
+</textarea>
+
+<p>
+This layer provides interaction between user and passport system.
+</p>
+
+</div>
+
+
+<button onclick="showOutput()">
+Run Passport Automation Simulation
+</button>
+
+
+<div class="output" id="result">
+
+<h2>System Execution Output</h2>
+
+<p><b>Applicant Name:</b> Siva</p>
+
+<p><b>Generated Passport ID:</b> PASS500</p>
+
+<p><b>Status:</b> Submitted</p>
+
+<p><b>Police Verification:</b> SUCCESS</p>
+
+<p><b>Final Passport Status:</b> VERIFIED</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+function showOutput(){
+
+    document.getElementById("result").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+######################################################## EXP 2 EXAM REGISTERATION ##############################################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Exam Registration System</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:600px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+h1{
+    text-align:center;
+    color:darkblue;
+}
+
+label{
+    font-weight:bold;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:15px;
+    border-radius:5px;
+    border:1px solid gray;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:darkblue;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:navy;
+}
+
+.output{
+    margin-top:25px;
+    padding:15px;
+    background:#eef;
+    border-left:5px solid green;
+    border-radius:5px;
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Exam Registration System</h1>
+
+<label>Student Name</label>
+<input type="text" id="studentName" placeholder="Enter Student Name">
+
+<label>Course Code</label>
+<input type="text" id="courseCode" placeholder="Enter Course Code">
+
+<label>Exam Fee Payment</label>
+<select id="payment">
+    <option value="yes">Paid</option>
+    <option value="no">Not Paid</option>
+</select>
+
+<button onclick="registerExam()">
+Register for Exam
+</button>
+
+<div class="output" id="result">
+
+<h2>Registration Details</h2>
+
+<p><b>Student ID:</b> <span id="sid"></span></p>
+
+<p><b>Student Name:</b> <span id="sname"></span></p>
+
+<p><b>Course Code:</b> <span id="course"></span></p>
+
+<p><b>Status:</b> <span id="status"></span></p>
+
+</div>
+
+</div>
+
+<script>
+
+let idCounter = 101;
+
+function registerExam(){
+
+    // User Interface Layer
+    let name = document.getElementById("studentName").value;
+    let course = document.getElementById("courseCode").value;
+    let payment = document.getElementById("payment").value;
+
+    if(name.trim() === "" || course.trim() === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    // Domain Object Layer Features
+    let registration = {
+        studentId : "STU" + idCounter,
+        studentName : name,
+        courseCode : course,
+        status : "PENDING_PAYMENT"
+    };
+
+    idCounter++;
+
+    // Technical Service Layer Features
+    if(payment === "yes"){
+        registration.status = "REGISTERED";
+    }
+
+    // Display Output
+    document.getElementById("sid").innerText = registration.studentId;
+    document.getElementById("sname").innerText = registration.studentName;
+    document.getElementById("course").innerText = registration.courseCode;
+    document.getElementById("status").innerText = registration.status;
+
+    document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
+
+
+######################################################## EXP 3 STOCK MAINTANCE ##############################################
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stock Maintenance System</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:650px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+h1{
+    text-align:center;
+    color:darkblue;
+}
+
+.box{
+    background:#eef3ff;
+    padding:15px;
+    border-left:5px solid darkblue;
+    border-radius:5px;
+    margin-top:20px;
+}
+
+label{
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:15px;
+    border-radius:5px;
+    border:1px solid gray;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:darkblue;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:navy;
+}
+
+.output{
+    margin-top:20px;
+    background:#e8ffe8;
+    padding:15px;
+    border-left:5px solid green;
+    border-radius:5px;
+    display:none;
+}
+
+.error{
+    margin-top:20px;
+    background:#ffe8e8;
+    padding:15px;
+    border-left:5px solid red;
+    border-radius:5px;
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Stock Maintenance System</h1>
+
+<div class="box">
+
+<h2>Current Product Details</h2>
+
+<p><b>Product ID:</b> P001</p>
+<p><b>Product Name:</b> Laptop</p>
+<p><b>Available Quantity:</b> <span id="qty">50</span></p>
+<p><b>Price:</b> $800</p>
+
+</div>
+
+<div class="box">
+
+<label>Enter Units Sold (Outgoing Stock)</label>
+
+<input type="number" id="sold" placeholder="Enter quantity sold">
+
+<button onclick="updateStock()">
+Update Stock
+</button>
+
+</div>
+
+<div class="output" id="successBox">
+
+<h2>Stock Updated Successfully</h2>
+
+<p><b>Product ID:</b> P001</p>
+<p><b>Product Name:</b> Laptop</p>
+<p><b>Remaining Quantity:</b> <span id="finalQty"></span></p>
+<p><b>Status:</b> Inventory Updated</p>
+
+</div>
+
+<div class="error" id="errorBox">
+
+<h2>Error</h2>
+
+<p>Insufficient stock available!</p>
+
+</div>
+
+</div>
+
+<script>
+
+let product = {
+
+    productID : "P001",
+    name : "Laptop",
+    quantity : 50,
+    price : 800.0
+
+};
+
+function updateStock(){
+
+    let sold = parseInt(document.getElementById("sold").value);
+
+    document.getElementById("successBox").style.display = "none";
+    document.getElementById("errorBox").style.display = "none";
+
+    if(isNaN(sold) || sold <= 0){
+
+        alert("Please enter valid quantity");
+        return;
+    }
+
+    // Technical Service Logic
+    if(product.quantity - sold >= 0){
+
+        product.quantity = product.quantity - sold;
+
+        // Update UI
+        document.getElementById("qty").innerText = product.quantity;
+        document.getElementById("finalQty").innerText = product.quantity;
+
+        document.getElementById("successBox").style.display = "block";
+
+    }else{
+
+        document.getElementById("errorBox").style.display = "block";
+
     }
 }
 
+</script>
+
+</body>
+</html>
 
 
-############################################### DEMO #############################
 
-package seleniumdemo;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-public class AmazonTest {
-
-    public static void main(String[] args) throws InterruptedException {
-
-        WebDriver driver = new ChromeDriver();
-
-        driver.get("https://www.amazon.in");
-
-        WebElement search =
-        driver.findElement(By.id("twotabsearchtextbox"));
-
-        search.sendKeys("Laptop");
-
-        search.submit();
-
-        Thread.sleep(3000);
-
-        System.out.println("Amazon search automation successful");
-
-        driver.quit();
-    }
-}
