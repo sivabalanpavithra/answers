@@ -61,3 +61,37 @@ public class LoginTest {
         driver.quit();
     }
 }
+
+
+
+############################################### DEMO #############################
+
+package seleniumdemo;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AmazonTest {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://www.amazon.in");
+
+        WebElement search =
+        driver.findElement(By.id("twotabsearchtextbox"));
+
+        search.sendKeys("Laptop");
+
+        search.submit();
+
+        Thread.sleep(3000);
+
+        System.out.println("Amazon search automation successful");
+
+        driver.quit();
+    }
+}
