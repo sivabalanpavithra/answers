@@ -1,547 +1,190 @@
-############################################ EXP 1 PASSPORT  ###########################################
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Passport Automation System - 3 Layer Architecture</title>
-
-<style>
-
-body{
-    font-family: Arial, sans-serif;
-    background:#f4f4f4;
-    margin:0;
-    padding:20px;
-}
-
-.container{
-    max-width:1000px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0px 0px 10px gray;
-}
-
-h1{
-    text-align:center;
-    color:darkblue;
-}
-
-.layer{
-    margin-top:25px;
-    padding:15px;
-    border-left:6px solid darkblue;
-    background:#eef3ff;
-    border-radius:5px;
-}
-
-textarea{
-    width:100%;
-    height:220px;
-    border:1px solid gray;
-    border-radius:5px;
-    padding:10px;
-    font-family: Consolas;
-    font-size:14px;
-    background:#fafafa;
-}
-
-button{
-    margin-top:20px;
-    width:100%;
-    padding:12px;
-    background:darkblue;
-    color:white;
-    border:none;
-    border-radius:5px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:navy;
-}
-
-.output{
-    margin-top:25px;
-    padding:15px;
-    background:#e8ffe8;
-    border-left:6px solid green;
-    border-radius:5px;
-    display:none;
-}
+############################ STAR SCHEMA ###########################
 
-</style>
-</head>
+CREATE TABLE PRODUCT ( 
+PRODUCTKEY INT PRIMARY KEY, 
+PRODUCTNAME VARCHAR (100), 
+BRANCHNAME VARCHAR (50)); 
+
+
+CREATE TABLE CUSTOMER ( 
+CUSTOMERKEY INT PRIMARY KEY, 
+CUSTOMERNAME VARCHAR (100), 
+CUSTOMERADDRESS VARCHAR (100)); 
 
-<body>
 
-<div class="container">
+CREATE TABLE TIMES ( 
+TIMEKEY INT PRIMARY 
+KEY, Date-Date, 
+MONTHS VARCHAR (20), 
+YEARS INT); 
+
+
+CREATE TABLE SALESREP ( 
+SALES_REPKEY INT PRIMARY KEY, 
+SALES_PERSON_NAME VARCHAR (1 
+TERRITORY_NAME VARCHAR (50), 
+REGION_NAME VARCHAR (100));
+
 
-<h1>Passport Automation System</h1>
+CREATE TABLE SALES_FACT 
+( SALESID INT PRIMARY KEY, 
+PRODUCTKEY INT, 
+TIMEKEY INT, 
+CUSTOMERKEY INT, 
+SALES_REPKEY INT, 
+SALESQUANTITY INT, 
+SALESPRICE DECIMAL 
+(10,2), 
+FOREIGN KEY(PRODUCTKEY) REFERENCES 
+PRODUCT(PRODUCTKEY), 
+FOREIGN KEY(TIMEKEY) REFERENCES 
+TIMES(TIMEKEY), FOREIGN KEY(CUSTOMERKEY) 
+REFERENCES CUSTOMER(CUSTOMERKEY), 
+FOREIGN KEY(SALES_REPKEY) REFERENCES 
+SALESREP(SALES_REPKEY)); 
 
-<div class="layer">
-<h2>1. Domain Object Layer</h2>
 
-<textarea readonly>
-class PassportRecord {
+############################ SNOWFLAKE SCHEMA ###########################
 
-    String id;
-    String name;
-    String status;
-
-    PassportRecord(id, name){
-        this.id = id;
-        this.name = name;
-        this.status = "New";
-    }
-}
-</textarea>
-
-<p>
-This layer stores passport applicant information and acts as the business object layer.
-</p>
-
-</div>
-
-
-<div class="layer">
-<h2>2. Technical Service Layer</h2>
-
-<textarea readonly>
-class PassportService {
-
-    createRecord(name){
-        // create passport application
-    }
-
-    processVerification(id, passed){
-        // verify applicant
-    }
-
-    find(id){
-        // search application
-    }
-}
-</textarea>
-
-<p>
-This layer handles business logic, verification process and application management.
-</p>
-
-</div>
-
-
-<div class="layer">
-<h2>3. User Interface Layer</h2>
-
-<textarea readonly>
-class PassportApp {
-
-    main(){
-
-        // get user input
-
-        // call service layer
-
-        // display output
-    }
-}
-</textarea>
-
-<p>
-This layer provides interaction between user and passport system.
-</p>
-
-</div>
-
-
-<button onclick="showOutput()">
-Run Passport Automation Simulation
-</button>
-
-
-<div class="output" id="result">
-
-<h2>System Execution Output</h2>
-
-<p><b>Applicant Name:</b> Siva</p>
-
-<p><b>Generated Passport ID:</b> PASS500</p>
-
-<p><b>Status:</b> Submitted</p>
-
-<p><b>Police Verification:</b> SUCCESS</p>
-
-<p><b>Final Passport Status:</b> VERIFIED</p>
-
-</div>
-
-</div>
-
-
-<script>
-
-function showOutput(){
-
-    document.getElementById("result").style.display = "block";
-
-}
-
-</script>
-
-</body>
-</html>
-
-
-
-######################################################## EXP 2 EXAM REGISTERATION ##############################################
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Exam Registration System</title>
-
-<style>
-
-body{
-    font-family: Arial, sans-serif;
-    background:#f2f2f2;
-    margin:0;
-    padding:20px;
-}
-
-.container{
-    max-width:600px;
-    margin:auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0px 0px 10px gray;
-}
-
-h1{
-    text-align:center;
-    color:darkblue;
-}
-
-label{
-    font-weight:bold;
-}
-
-input, select{
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    margin-bottom:15px;
-    border-radius:5px;
-    border:1px solid gray;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:darkblue;
-    color:white;
-    border:none;
-    border-radius:5px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:navy;
-}
-
-.output{
-    margin-top:25px;
-    padding:15px;
-    background:#eef;
-    border-left:5px solid green;
-    border-radius:5px;
-    display:none;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>Exam Registration System</h1>
-
-<label>Student Name</label>
-<input type="text" id="studentName" placeholder="Enter Student Name">
-
-<label>Course Code</label>
-<input type="text" id="courseCode" placeholder="Enter Course Code">
-
-<label>Exam Fee Payment</label>
-<select id="payment">
-    <option value="yes">Paid</option>
-    <option value="no">Not Paid</option>
-</select>
-
-<button onclick="registerExam()">
-Register for Exam
-</button>
-
-<div class="output" id="result">
-
-<h2>Registration Details</h2>
-
-<p><b>Student ID:</b> <span id="sid"></span></p>
-
-<p><b>Student Name:</b> <span id="sname"></span></p>
-
-<p><b>Course Code:</b> <span id="course"></span></p>
-
-<p><b>Status:</b> <span id="status"></span></p>
-
-</div>
-
-</div>
-
-<script>
-
-let idCounter = 101;
-
-function registerExam(){
-
-    // User Interface Layer
-    let name = document.getElementById("studentName").value;
-    let course = document.getElementById("courseCode").value;
-    let payment = document.getElementById("payment").value;
-
-    if(name.trim() === "" || course.trim() === ""){
-        alert("Please fill all fields");
-        return;
-    }
-
-    // Domain Object Layer Features
-    let registration = {
-        studentId : "STU" + idCounter,
-        studentName : name,
-        courseCode : course,
-        status : "PENDING_PAYMENT"
-    };
-
-    idCounter++;
-
-    // Technical Service Layer Features
-    if(payment === "yes"){
-        registration.status = "REGISTERED";
-    }
-
-    // Display Output
-    document.getElementById("sid").innerText = registration.studentId;
-    document.getElementById("sname").innerText = registration.studentName;
-    document.getElementById("course").innerText = registration.courseCode;
-    document.getElementById("status").innerText = registration.status;
-
-    document.getElementById("result").style.display = "block";
-}
-
-</script>
-
-</body>
-</html>
-
-
-######################################################## EXP 3 STOCK MAINTANCE ##############################################
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Stock Maintenance System</title>
-
-<style>
-
-body{
-    font-family: Arial, sans-serif;
-    background:#f2f2f2;
-    margin:0;
-    padding:20px;
-}
-
-.container{
-    max-width:650px;
-    margin:auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0px 0px 10px gray;
-}
-
-h1{
-    text-align:center;
-    color:darkblue;
-}
-
-.box{
-    background:#eef3ff;
-    padding:15px;
-    border-left:5px solid darkblue;
-    border-radius:5px;
-    margin-top:20px;
-}
-
-label{
-    font-weight:bold;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    margin-bottom:15px;
-    border-radius:5px;
-    border:1px solid gray;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:darkblue;
-    color:white;
-    border:none;
-    border-radius:5px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:navy;
-}
-
-.output{
-    margin-top:20px;
-    background:#e8ffe8;
-    padding:15px;
-    border-left:5px solid green;
-    border-radius:5px;
-    display:none;
-}
-
-.error{
-    margin-top:20px;
-    background:#ffe8e8;
-    padding:15px;
-    border-left:5px solid red;
-    border-radius:5px;
-    display:none;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>Stock Maintenance System</h1>
-
-<div class="box">
-
-<h2>Current Product Details</h2>
-
-<p><b>Product ID:</b> P001</p>
-<p><b>Product Name:</b> Laptop</p>
-<p><b>Available Quantity:</b> <span id="qty">50</span></p>
-<p><b>Price:</b> $800</p>
-
-</div>
-
-<div class="box">
-
-<label>Enter Units Sold (Outgoing Stock)</label>
-
-<input type="number" id="sold" placeholder="Enter quantity sold">
-
-<button onclick="updateStock()">
-Update Stock
-</button>
-
-</div>
-
-<div class="output" id="successBox">
-
-<h2>Stock Updated Successfully</h2>
-
-<p><b>Product ID:</b> P001</p>
-<p><b>Product Name:</b> Laptop</p>
-<p><b>Remaining Quantity:</b> <span id="finalQty"></span></p>
-<p><b>Status:</b> Inventory Updated</p>
-
-</div>
-
-<div class="error" id="errorBox">
-
-<h2>Error</h2>
-
-<p>Insufficient stock available!</p>
-
-</div>
-
-</div>
-
-<script>
-
-let product = {
-
-    productID : "P001",
-    name : "Laptop",
-    quantity : 50,
-    price : 800.0
-
-};
-
-function updateStock(){
-
-    let sold = parseInt(document.getElementById("sold").value);
-
-    document.getElementById("successBox").style.display = "none";
-    document.getElementById("errorBox").style.display = "none";
-
-    if(isNaN(sold) || sold <= 0){
-
-        alert("Please enter valid quantity");
-        return;
-    }
-
-    // Technical Service Logic
-    if(product.quantity - sold >= 0){
-
-        product.quantity = product.quantity - sold;
-
-        // Update UI
-        document.getElementById("qty").innerText = product.quantity;
-        document.getElementById("finalQty").innerText = product.quantity;
-
-        document.getElementById("successBox").style.display = "block";
-
-    }else{
-
-        document.getElementById("errorBox").style.display = "block";
-
-    }
-}
-
-</script>
-
-</body>
-</html>
-
-
-
-
+CREATE TABLE WEEK ( 
+    WEEK_ID INT PRIMARY KEY, 
+    WEEKTRANS INT, 
+    MONTH_ID INT 
+);
+
+
+CREATE TABLE SUB_BRANCH ( 
+    SUBBRANCH_ID INT PRIMARY KEY, 
+    SUBBRANCHNAME VARCHAR(50) 
+); 
+
+
+CREATE TABLE CATPAYMENT ( 
+    CATPAY_ID INT PRIMARY KEY, 
+    CATPAYNAME VARCHAR(50) 
+); 
+
+
+CREATE TABLE SUBMENU ( 
+    SUBMENU_ID INT PRIMARY KEY, 
+    SUBMENUNAME VARCHAR(50), 
+    CATMENU_ID INT 
+);
+
+
+CREATE TABLE Date_TRANS ( 
+    Date_ID INT PRIMARY KEY, 
+    Date_TRANS DATE,
+   WEEK_ID INT, 
+    FOREIGN KEY (WEEK_ID) REFERENCES WEEK(WEEK_ID) 
+); 
+
+
+CREATE TABLE BRANCH ( 
+    BRANCH_ID INT PRIMARY KEY, 
+    BRANCHNAME VARCHAR(50), 
+    SUBBRANCH_ID INT, 
+    FOREIGN KEY (SUBBRANCH_ID) REFERENCES 
+SUB_BRANCH(SUBBRANCH_ID) 
+);
+
+
+CREATE TABLE MENU ( 
+    MENU_ID INT PRIMARY KEY, 
+    MENUNAME VARCHAR(50), 
+   SUBMENU_ID INT, 
+    FOREIGN KEY (SUBMENU_ID) REFERENCES 
+SUBMENU(SUBMENU_ID) 
+); 
+
+
+CREATE TABLE PAYMENT ( 
+    PAY_ID INT PRIMARY KEY, 
+    WAYTOPAY VARCHAR(50), 
+    CATPAY_ID INT, 
+    FOREIGN KEY (CATPAY_ID) REFERENCES 
+CATPAYMENT(CATPAY_ID) 
+);
+
+
+
+CREATE TABLE SALE ( 
+    MENU_ID INT, 
+    STAFF_ID INT, 
+    Date_ID INT, 
+    BRANCH_ID INT, 
+    PAY_ID INT, 
+    QTY_BUY INT, 
+    SUB_TOTAL INT, 
+    FOREIGN KEY (Date_ID) REFERENCES Date_TRANS(Date_ID), 
+    FOREIGN KEY (BRANCH_ID) REFERENCES BRANCH(BRANCH_ID), 
+    FOREIGN KEY (MENU_ID) REFERENCES MENU(MENU_ID), 
+    FOREIGN KEY (PAY_ID) REFERENCES PAYMENT(PAY_ID) 
+);
+
+
+############################ EXP7 OLTP ################################
+
+ `INSERT INTO Customers (Customer-ID, Name, Email) VALUES (1, 'John Doe', 
+'john@example.com'); 
+
+ `UPDate Products SET Stock-Quantity = Stock-Quantity
+ - 1 WHERE Product-ID = 101;
+
+ `SELECT * FROM Orders WHERE Order-ID = 123;
+
+SELECT Customers. Name, Orders. Order-ID, Products. ProductName FROM Customers 
+JOIN Orders ON Customers. Customer-ID = Orders. Customer-ID JOIN OrderDetails ON 
+Orders. Order-ID = OrderDetails. Order-ID JOIN Products ON OrderDetails. Product-ID = 
+Products. Product-ID WHERE Customers. Customer-ID = 1; 
+
+ `DELETE FROM Employees WHERE 
+Employee-ID = 101; 
+
+
+CREATE TABLE employee2( name 
+varchar(45) NOT NULL, 
+occupation varchar(35) NOT NULL, working_Date Date, 
+working_hours varchar(10), salary 
+INT 
+); 
+INSERT INTO employee2 VALUES ('kabilan', 'HR', 
+'2020-10-04', 9, 25000), 
+('rasheq', 'Engineer', '2020-10-04', 12, 65000), 
+('vimal', 'Writer', '2020-10-04', 13, 35000), 
+('dhinesh', 'Manager', '2020-10-04', 10, 45000), 
+('vinay', 'Teacher', '2020-10-04', 12, 30000), 
+('karthi', 'Writer', '2020-10-04', 13, 35000); 
+SELECT COUNT (*) AS 
+total_employees FROM 
+employee2; SELECT SUM 
+(salary) AS total_salary FROM 
+employee2; SELECT 
+AVG(salary) AS "Average 
+Salary" FROM employee2; 
+SELECT MIN(salary) AS 
+"Lowest Salary" FROM 
+employee2; CREATE TABLE 
+emp_address2(name 
+varchar(45), cellphone 
+varchar(25), address 
+varchar(90), city varchar(35) 
+);
+
+
+INSERT INTO emp_address2(name, cellphone, address, city) VALUES 
+('pradeep', '334369253659', '777 Brockton Avenue, Abington MA 2351', 'salem'), 
+('gokul ', '359436598356', '3849 Route 31, Clay NY 12041', 'trichy'), 
+('vimal', '768055634859', '345 East Meighan Blvd, Gadsden AL 359', 'karur'), ('dhinesh', 
+'948563945327', '301 RT 9W, Glenmont NY 12077', 'erode'),  
+('vinay', '465676423435', '501 Memorial Dr, Chicopee MA 1030', 'chennai'), 
+('karthi', '506705670323', '317 Russell St, Hadley MA 1415', 'kovai'); SELECT 
+COUNT(employee2.name) AS Names, COUNT(emp_address2.city) AS addresses FROM 
+employee2 
+INNER JOIN emp_address2 ON employee2.name = emp_address2.name; 
+
+
+SELECT students.name, comments.forum_username, comments.comment FROM students 
+INNER JOIN comments 
+ON students.forum_username = comments.forum_username ORDER BY 
+students.name ASC; 
