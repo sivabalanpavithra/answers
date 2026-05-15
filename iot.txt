@@ -1,3 +1,7 @@
+############################ SQL SCHEMA ############################
+
+https://sql-workbench.onrender.com/sql_sim.html
+
 ############################ STAR SCHEMA ###########################
 
 CREATE TABLE PRODUCT ( 
